@@ -2,6 +2,7 @@ require('spec_helper')
 
 describe(Recipe) do
   describe("#categories") do
+    #List all the categories brownies are in: dessert, gluten-free, vegan
     it("adds and verifies adding a category to a recipe") do
       test_recipe = Recipe.create({title: 'Brownies', instruction: 'Bake', rating: 4})
       test_category = Category.create({tag: 'Dessert'})
@@ -11,6 +12,7 @@ describe(Recipe) do
   end
 
   describe("#ingredients") do
+    #List all the ingredients in brownies
     it("adds and verifies adding an ingredient to a recipe") do
       test_recipe = Recipe.create({title: 'Brownies', instruction: 'Bake', rating: 4})
       test_ingredient = Ingredient.create({name: 'Chocolate'})
