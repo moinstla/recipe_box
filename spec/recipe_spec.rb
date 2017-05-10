@@ -1,0 +1,21 @@
+require('spec_helper')
+
+describe(Recipe) do
+  describe("#categories") do
+    it("adds and verifies adding a category to a recipe") do
+      test_recipe = Recipe.create({title: 'Brownies', instruction: 'Bake', rating: 4})
+      test_category = Category.create({tag: 'Dessert'})
+      test_recipe.categories.push(test_category)
+      expect(test_recipe.categories).to eq([test_category])
+    end
+  end
+
+  describe("#ingredients") do
+    it("adds and verifies adding an ingredient to a recipe") do
+      test_recipe = Recipe.create({title: 'Brownies', instruction: 'Bake', rating: 4})
+      test_ingredient = Ingredient.create({name: 'Chocolate'})
+      test_recipe.ingredients.push(test_ingredient)
+      expect(test_recipe.ingredients).to eq([test_ingredient])
+    end
+  end
+end
