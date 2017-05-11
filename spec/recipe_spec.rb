@@ -1,6 +1,11 @@
 require('spec_helper')
 
 describe(Recipe) do
+  describe("Recipe") do
+    it { should have_and_belong_to_many(:categories) }
+    it { should have_and_belong_to_many(:ingredients) }
+  end
+
   describe("#categories") do
     #List all the categories brownies are in: dessert, gluten-free, vegan
     it("adds and verifies adding a category to a recipe") do
