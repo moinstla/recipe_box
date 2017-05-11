@@ -21,10 +21,14 @@ end
 # adds recipe to list
 post('/recipes') do
   recipe_title = params["title"]
-  @recipe = Recipe.create({:title => recipe_title})
+  instructions = params.fetch("instructions")
+  @recipe = Recipe.create({:title => recipe_title, :instruction => instructions})
   @recipes = Recipe.all
-  redirect to("/")
+  @categories = Category.all
+  @ingredients = Ingredient.all
+  erb(:recipe)
 end
+
 #  assigns category to recipe
 get("/recipes/:id") do
   @ingredients = Ingredient.all
