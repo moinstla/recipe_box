@@ -8,12 +8,42 @@
   <% end %>
 </ul>
 <% end %>
+<% if @recipe.categories.empty? %>
 <h3>Add a category to this recipe</h3>
+<% else %>
+<h3>Add another category to this recipe</h3>
+<% end %>
 <form action="/recipes/<%= @recipe.id%>/add_category" method="post">
   <label for="category_id">Select Category</label>
   <select id="category_id" name='category_id' type='text'>
     <% @categories.each do |category| %>
       <option value="<%= category.id%>"> <%= category.tag %> </option>
+    <% end %>
+  </select>
+  <br>
+    <button class="btn btn-info" type="submit">Submit</button>
+</form>
+<hr>
+
+<% if @recipe.ingredients.any? %>
+<h3>Ingredients: </h3>
+<ul>
+  <% @recipe.ingredients.each do |ingredient| %>
+  <li> <%= ingredient.name %></li>
+  <% end %>
+</ul>
+<% end %>
+<% if @recipe.ingredients.empty? %>
+<h3>Add an ingredient to this recipe</h3>
+<% else %>
+<h3>Add another ingredient to this recipe</h3>
+<% end %>
+
+<form action="/recipes/<%= @recipe.id%>/add_ingredient" method="post">
+  <label for="ingredient_id">Select Ingredient</label>
+  <select id="ingredient_id" name='ingredient_id' type='text'>
+    <% @ingredients.each do |ingredient| %>
+      <option value="<%= ingredient.id%>"> <%= ingredient.name %> </option>
     <% end %>
   </select>
   <br>

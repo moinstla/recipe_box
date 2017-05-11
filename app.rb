@@ -25,24 +25,30 @@ post('/recipes') do
   @recipes = Recipe.all
   redirect to("/")
 end
-
+#  assigns category to recipe
 get("/recipes/:id") do
+  @ingredients = Ingredient.all
   @categories = Category.all
   @recipe = Recipe.find(params.fetch('id').to_i)
   erb(:recipe)
 end
-
-# get('/recipes/:id/edit') do
-#   @recipe = Recipe.find(params.fetch('id').to_i)
-#   erb(:recipe)
-# end
-
-
+# shows new category for recipe
 post('/recipes/:id/add_category') do
   @recipe = Recipe.find(params.fetch('id').to_i)
   @category = Category.find(params.fetch('category_id').to_i)
   @recipe.categories.push(@category)
   @categories = Category.all
+  @ingredients = Ingredient.all
+  erb(:recipe)
+end
+
+# shows new ingredient for recipe
+post('/recipes/:id/add_ingredient') do
+  @categories = Category.all
+  @recipe = Recipe.find(params.fetch('id').to_i)
+  @ingredient = Ingredient.find(params.fetch('ingredient_id').to_i)
+  @recipe.ingredients.push(@ingredient)
+  @ingredients = Ingredient.all
   erb(:recipe)
 end
 
@@ -58,15 +64,12 @@ post('/ingredients') do
   @ingredient = Ingredient.create({:name => ingredient_name})
   @ingredients = Ingredient.all
   redirect to("/")
-
-
 end
-
+# routes to ingredient page
 get('/ingredients/:id') do
   @ingredient = Ingredient.find(params.fetch('id').to_i)
   erb(:ingredient)
 end
-
 
 # CATEGORIES
 # direct to add category form
@@ -80,8 +83,6 @@ post('/categories') do
   @category = Category.create({:tag => category_tag})
   @categories = Category.all
   redirect to("/")
-
-
 end
 
 get('/categories/:id') do
