@@ -1,9 +1,30 @@
 <h1><%= @recipe.title %></h1>
+<hr>
+<% if @recipe.categories.any? %>
+<h3>Categories: </h3>
+<ul>
+  <% @recipe.categories.each do |category| %>
+  <li> <%= category.tag %></li>
+  <% end %>
+</ul>
+<% end %>
+<h3>Add a category to this recipe</h3>
+<form action="/recipes/<%= @recipe.id%>/add_category" method="post">
+  <label for="category_id">Select Category</label>
+  <select id="category_id" name='category_id' type='text'>
+    <% @categories.each do |category| %>
+      <option value="<%= category.id%>"> <%= category.tag %> </option>
+    <% end %>
+  </select>
+  <br>
+    <button class="btn btn-info" type="submit">Submit</button>
+</form>
+<hr>
 
 
 
-<!-- Assign Category
-Add Ingredients
+
+<!--  Add Ingredients
 Edit Recipe
 
 Add Instruction Field

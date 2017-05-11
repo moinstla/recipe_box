@@ -24,12 +24,25 @@ post('/recipes') do
   @recipe = Recipe.create({:title => recipe_title})
   @recipes = Recipe.all
   redirect to("/")
-
-
 end
 
-get('/recipes/:id') do
+get("/recipes/:id") do
+  @categories = Category.all
   @recipe = Recipe.find(params.fetch('id').to_i)
+  erb(:recipe)
+end
+
+# get('/recipes/:id/edit') do
+#   @recipe = Recipe.find(params.fetch('id').to_i)
+#   erb(:recipe)
+# end
+
+
+post('/recipes/:id/add_category') do
+  @recipe = Recipe.find(params.fetch('id').to_i)
+  @category = Category.find(params.fetch('category_id').to_i)
+  @recipe.categories.push(@category)
+  @categories = Category.all
   erb(:recipe)
 end
 
